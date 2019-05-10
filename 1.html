@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Grid Layout</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      .header,
+      .footer {
+        background-color: #1a1c22;
+        height: 100px;
+        width: 100%;
+      }
+      /* .header {
+        position: fixed;
+      } */
+      /* .footer {
+        position: fixed;
+        bottom: 0;
+      } */
+      .main {
+        margin-top: 15px;
+        min-height: 400px;
+        height: 100%;
+        margin-bottom: 15px;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 15px;
+      }
+      .main__sidebar {
+        background-color: #6c757d;
+      }
+      .content {
+        display: grid;
+        gap: 15px;
+      }
+      .content__item {
+        background-color: #343a40;
+      }
+      @media (min-width: 600px) {
+        .content {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (min-width: 900px) {
+        .main {
+          grid-template-columns: 400px 1fr;
+          grid-template-rows: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header"></header>
+      <main class="main">
+        <aside class="main__sidebar"></aside>
+        <section class="main__section content">
+          <div class="content__item"></div>
+          <div class="content__item"></div>
+          <div class="content__item"></div>
+          <div class="content__item"></div>
+          <div class="content__item"></div>
+          <div class="content__item"></div>
+        </section>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

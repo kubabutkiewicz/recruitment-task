@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+    <title>Filtered list</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lato", sans-serif;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .form__input {
+        width: 250px;
+        padding: 10px 15px;
+        border: 0;
+        background-color: #333333;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        transition: box-shadow 0.2s ease-in-out;
+        margin-bottom: 15px;
+      }
+
+      .form__input::placeholder {
+        color: white;
+        font-size: 16px;
+      }
+      .form__input:focus {
+        outline: none;
+        box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.5);
+      }
+      .form__submit {
+        font-size: 16px;
+        background-color: #b4da55;
+        padding: 6px 20px;
+        border: 0;
+        border-radius: 10px;
+      }
+      .list {
+        list-style: none;
+        padding: 0;
+        border-top: 2px solid #333333;
+        border-right: 2px solid #333333;
+        border-left: 2px solid #333333;
+        min-width: 500px;
+        display: grid;
+      }
+      .list__item {
+        padding: 15px 0 15px 10px;
+        border-bottom: 2px solid #333333;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form" class="form">
+      <input
+        type="text"
+        id="input"
+        class="form__input"
+        placeholder="Filter list"
+      />
+      <input type="submit" value="Filter" class="form__submit" />
+    </form>
+
+    <ul class="list"></ul>
+
+    <script>
+      const listItems = [
+        "Walmart",
+        "State Grid",
+        "Sinopec Group",
+        "China National Petroleum",
+        "Royal Dutch Shell",
+        "Toyota Motor",
+        "Volkswagen",
+        "BP",
+        "Exxon Mobil",
+        "Berkshire Hathaway"
+      ];
+
+      const form = document.getElementById("form");
+
+      const createTable = list => {
+        const ul = document.querySelector(".list");
+        list.map(listItem => {
+          const li = document.createElement("li");
+          li.classList.add("list__item");
+          li.textContent = listItem;
+          ul.appendChild(li);
+        });
+      };
+      const filterList = e => {
+        e.preventDefault();
+        const formInput = form.children[0].value.toLowerCase();
+        const lis = document.querySelectorAll(".list__item");
+
+        lis.forEach(item => {
+          if (item.textContent.toLowerCase().indexOf(formInput) > -1) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      };
+
+      form.addEventListener("submit", filterList);
+      window.addEventListener("DOMContentLoaded", createTable(listItems));
+    </script>
+  </body>
+</html>
